@@ -5,9 +5,13 @@ import pydeck as pdk
 # Set the title of the app
 st.title('Tamr Gartner Bake-Off')
 
-# Display a logo
-logo_path = 'tamr.png'  
-st.image(logo_path, caption='')
+# Create three columns
+col1, col2, col3 = st.columns([1,2,1])  # The middle column is larger
+
+# Display the logo in the middle column
+with col2:
+    st.image("tamr.png", use_column_width=True)
+    st.image(logo_path, caption='')
 
 st.markdown("What's your perception of income inequality? The OECD tool Compare your income allows you to see whether your perception is in line with reality. In only a few clicks, you can see where you fit in your country's income distribution. In June 2020, an updated edition was released to explore how people’s perceptions of inequality impact their willingness to support redistribution and to see what areas users would prioritise for public spending.")
 
