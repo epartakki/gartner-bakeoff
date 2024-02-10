@@ -4,5 +4,5 @@ import streamlit as st
 st.title('Tamr Gartner Bake-Off')
 
 # Display a logo
-logo_path = 'logo.png'  
+logo_path = 'tamr.png'  
 st.image(logo_path, caption='Tamr')
