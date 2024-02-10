@@ -9,7 +9,7 @@ st.title('Tamr Gartner Bake-Off')
 logo_path = 'tamr.png'  
 st.image(logo_path, caption='')
 
-st.text("What's your perception of income inequality? The OECD tool Compare your income allows you to see whether your perception is in line with reality. In only a few clicks, you can see where you fit in your country's income distribution. In June 2020, an updated edition was released to explore how people’s perceptions of inequality impact their willingness to support redistribution and to see what areas users would prioritise for public spending.")
+st.markdown("What's your perception of income inequality? The OECD tool Compare your income allows you to see whether your perception is in line with reality. In only a few clicks, you can see where you fit in your country's income distribution. In June 2020, an updated edition was released to explore how people’s perceptions of inequality impact their willingness to support redistribution and to see what areas users would prioritise for public spending.")
 
 
 # Data including all the specified countries, their latitudes, longitudes, and placeholder counts
