@@ -4,9 +4,9 @@ import plotly.express as px
 
 # Sidebar for navigation
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ("Data Visualization", "About"))
+page = st.sidebar.radio("Go to", ("OECD Report on Poverty", "Provider Location in the United States", "About"))
 
-if page == "OECD Poverty Report":
+if page == "OECD Report on Poverty":
     # Create three columns
     col1, col2, col3 = st.columns([1, 2, 1])  # The middle column is larger
 
@@ -54,6 +54,11 @@ if page == "OECD Poverty Report":
         plot_data(filtered_data)
     else:
         st.write("No data available for the selected criteria.")
+
+elif page == "Provider Location in the United States":
+    st.title("Provider Location in the United States")
+    # This section is left empty per user request
+    st.write("Content for 'Provider Location in the United States' goes here.")
 
 elif page == "About":
     st.title("About This App")
