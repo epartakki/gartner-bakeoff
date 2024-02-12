@@ -60,6 +60,41 @@ elif page == "Provider Location in the United States":
     # This section is left empty per user request
     st.write("Content for 'Provider Location in the United States' goes here.")
 
+    @st.cache
+    def load_provider_data():
+        data = pd.read_csv("provider.csv")
+        # Assuming "Enriched Region" needs to be split into latitude and longitude
+        # This is a placeholder: adjust according to your actual data format
+        # data[['Latitude', 'Longitude']] = data['Enriched Region'].str.split(',', expand=True).astype(float)
+        return data
+
+    df = load_provider_data()
+
+    # Assuming your CSV has these columns split already; if not, you'll need to preprocess
+    # If "Enriched Region" is not in lat/lon format, you'll need to convert or map these regions to coordinates
+    specialty_options = ['All'] + sorted(df['Specialty'].unique().tolist())
+    selected_specialty = st.selectbox("Select Specialty", options=specialty_options)
+
+    if selected_specialty != 'All':
+        df_filtered = df[df['Specialty'] == selected_specialty]
+    else:
+        df_filtered = df
+
+    # Assuming 'Latitude' and 'Longitude' columns exist in your dataframe
+    # Plotting the map
+    if not df_filtered.empty:
+        fig = px.scatter_mapbox(df_filtered,
+                                lat="Latitude", 
+                                lon="Longitude",
+                                color="Specialty",
+                                hover_name="Specialty",
+                                zoom=3,
+                                height=300)
+        fig.update_layout(mapbox_style="open-street-map")
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.write("No data available for the selected criteria.")
+
 elif page == "About":
     st.title("About This App")
     st.write("This app is designed to visualize income inequality and poverty rates across different countries and years, using data from the OECD. It aims to provide insights into how income distribution varies globally and to encourage discussions on the impacts of inequality.")
