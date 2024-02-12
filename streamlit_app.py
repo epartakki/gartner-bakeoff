@@ -57,37 +57,22 @@ if page == "OECD Report on Poverty":
 
 elif page == "Provider Location in the United States":
     st.title("Provider Location in the United States")
-    # This section is left empty per user request
-    st.write("Content for 'Provider Location in the United States' goes here.")
 
     @st.cache
     def load_provider_data():
+        # Reading directly from 'providers.csv' with the specified latitude and longitude columns
         data = pd.read_csv("providers.csv")
-        # Assuming "Enriched Region" needs to be split into latitude and longitude
-        # This is a placeholder: adjust according to your actual data format
-        # data[['Latitude', 'Longitude']] = data['Enriched Region'].str.split(',', expand=True).astype(float)
         return data
 
     df = load_provider_data()
 
-    # Assuming your CSV has these columns split already; if not, you'll need to preprocess
-    # If "Enriched Region" is not in lat/lon format, you'll need to convert or map these regions to coordinates
-    specialty_options = ['All'] + sorted(df['Taxonomy Description'].unique().tolist())
-    selected_specialty = st.selectbox("Select Specialty", options=specialty_options)
-
-    if selected_specialty != 'All':
-        df_filtered = df[df['Taxonomy Description'] == selected_specialty]
-    else:
-        df_filtered = df
-
-    # Assuming 'Latitude' and 'Longitude' columns exist in your dataframe
-    # Plotting the map
-    if not df_filtered.empty:
-        fig = px.scatter_mapbox(df_filtered,
-                                lat="Latitude", 
-                                lon="Longitude",
-                                color="Specialty",
-                                hover_name="Specialty",
+    # Assuming 'Region' or another column should be used for hover information. Adjust as necessary.
+    if not df.empty and "Enriched Address Latitude" in df.columns and "Enriched Address Longitude" in df.columns:
+        fig = px.scatter_mapbox(df,
+                                lat="Enriched Address Latitude", 
+                                lon="Enriched Address Longitude",
+                                hover_name="Region",  # Update 'Region' to your specific hover detail column if different
+                                color_discrete_sequence=px.colors.qualitative.Plotly,  # Using a discrete color sequence
                                 zoom=3,
                                 height=300)
         fig.update_layout(mapbox_style="open-street-map")
