@@ -2,18 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.markdown(
-    """
-    <style>
-    .css-18e3th9 {
-        background-color: #0896FF;
-    }
-    /* Additional styling can be added here */
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Sidebar for navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ("OECD Report on Poverty", "Providers accepting Medicaid", "Access to Subsidized Medicine", "About"))
