@@ -15,7 +15,7 @@ st.text('')
 
 st.markdown("What's your perception of income inequality? The OECD tool Compare your income allows you to see whether your perception is in line with reality. In only a few clicks, you can see where you fit in your country's income distribution. In June 2020, an updated edition was released to explore how people’s perceptions of inequality impact their willingness to support redistribution and to see what areas users would prioritise for public spending.")
 
-st.markdown('The OECD Income Distribution database (IDD) has been developed to benchmark and monitor countries’ performance in the field of income inequality and poverty. It contains a number of standardised indicators based on the central concept of “equivalised household disposable income”, i.e. the total income received by the households less the current taxes and transfers they pay, adjusted for household size with an equivalence scale. While household income is only one of the factors shaping people’s economic well-being, it is also the one for which comparable data for all OECD countries are most common. Income distribution has a long-standing tradition among household-level statistics, with regular data collections going back to the 1980s (and sometimes earlier) in many OECD countries.')
+st.markdown('The OECD Income Distribution database (IDD) has been developed to benchmark and monitor countries’ performance in the field of income inequality and poverty. It contains a number of standardised indicators based on the central concept of “equivalised household disposable income”, i.e., the total income received by the households less the current taxes and transfers they pay, adjusted for household size with an equivalence scale. While household income is only one of the factors shaping people’s economic well-being, it is also the one for which comparable data for all OECD countries are most common. Income distribution has a long-standing tradition among household-level statistics, with regular data collections going back to the 1980s (and sometimes earlier) in many OECD countries.')
 
 # Load and cache the data
 @st.cache
@@ -28,15 +28,14 @@ def load_data():
 
 # Function to plot the data
 def plot_data(filtered_df):
-    fig = px.scatter(filtered_df, x="country", y="value", color="age",
-                     title="Poverty Rates by Age Group and Year")
+    fig = px.scatter(filtered_df, x="country", y="value", color="measure",
+                     title="Poverty Rates by Country and Year")
     st.plotly_chart(fig, use_container_width=True)
 
 # Main app function
 def main():
     df = load_data()
 
-    # Display the app title again is redundant, you can remove the second title.
     # Filters above the graph
     country_options = ['Select All'] + sorted(df['country'].unique().tolist())
     year_options = ['Select All'] + sorted(df['year'].unique().tolist())
@@ -49,11 +48,11 @@ def main():
     if 'Select All' in countries:
         countries = country_options[1:]  # Exclude 'Select All'
     
-    # Filter the data
+    # Apply filters to data
     if selected_year == 'Select All':
-        filtered_data = df[(df['country'].isin(countries)) & (df['age'].isin(age_groups))]
+        filtered_data = df[df['country'].isin(countries)]
     else:
-        filtered_data = df[(df['country'].isin(countries)) & (df['age'].isin(age_groups)) & (df['year'] == selected_year)]
+        filtered_data = df[df['country'].isin(countries) & (df['year'] == selected_year)]
 
     # Plot the data if selections are made
     if not filtered_data.empty:
