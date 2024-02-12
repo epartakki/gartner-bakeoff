@@ -6,7 +6,7 @@ import plotly.express as px
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ("Data Visualization", "About"))
 
-if page == "Data Visualization":
+if page == "OECD Poverty Report":
     # Create three columns
     col1, col2, col3 = st.columns([1, 2, 1])  # The middle column is larger
 
