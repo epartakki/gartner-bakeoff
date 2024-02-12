@@ -4,7 +4,7 @@ import plotly.express as px
 
 # Sidebar for navigation
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ("OECD Report on Poverty", "Provider Location in the United States", "Access to Subsidized Medicine", "About"))
+page = st.sidebar.radio("Go to", ("OECD Report on Poverty", "Providers accepting Medicaid", "Access to Subsidized Medicine", "About"))
 
 if page == "OECD Report on Poverty":
     # Create three columns
@@ -55,7 +55,7 @@ if page == "OECD Report on Poverty":
     else:
         st.write("No data available for the selected criteria.")
 
-elif page == "Provider Location in the United States":
+elif page == "Providers accepting Medicaid":
     st.title("Provider Location in the United States")
 
     @st.cache
@@ -66,37 +66,20 @@ elif page == "Provider Location in the United States":
 
     df = load_provider_data()
 
-    # Region Filter
-    # Get a sorted list of unique region values from the DataFrame
-    regions = sorted(df['Region'].unique())
-    selected_region = st.selectbox('Filter by Region:', ['All'] + regions)
-
-    # Filter DataFrame based on selected region
-    if selected_region != 'All':
-        df_filtered = df[df['Region'] == selected_region]
-    else:
-        df_filtered = df
-
-    # Search Bar (does nothing for now, but you can capture input)
-    search_query = st.text_input('Search:', '')
-
-    # Placeholder for where you might use search_query
-    # For now, it does nothing, but you can add functionality as needed
-    # st.write(f"You searched for: {search_query}")
-
-    # Plotting the map with the filtered DataFrame
-    if not df_filtered.empty:
-        fig = px.scatter_mapbox(df_filtered,
+    # Assuming 'Region' or another column should be used for hover information. Adjust as necessary.
+    if not df.empty and "Enriched Address Latitude" in df.columns and "Enriched Address Longitude" in df.columns:
+        fig = px.scatter_mapbox(df,
                                 lat="Enriched Address Latitude", 
                                 lon="Enriched Address Longitude",
-                                hover_name="Region",  # Adjust if necessary
-                                color_discrete_sequence=px.colors.qualitative.Plotly,
+                                hover_name="Region",  # Update 'Region' to your specific hover detail column if different
+                                color_discrete_sequence=px.colors.qualitative.Plotly,  # Using a discrete color sequence
                                 zoom=3,
                                 height=300)
         fig.update_layout(mapbox_style="open-street-map")
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.write("No data available for the selected criteria.")
+        
 
 elif page == "Access to Subsidized Medicine":
     st.title("About This App")
