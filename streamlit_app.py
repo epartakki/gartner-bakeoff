@@ -72,11 +72,11 @@ elif page == "Provider Location in the United States":
 
     # Assuming your CSV has these columns split already; if not, you'll need to preprocess
     # If "Enriched Region" is not in lat/lon format, you'll need to convert or map these regions to coordinates
-    specialty_options = ['All'] + sorted(df['Specialty'].unique().tolist())
+    specialty_options = ['All'] + sorted(df['Taxonomy Description'].unique().tolist())
     selected_specialty = st.selectbox("Select Specialty", options=specialty_options)
 
     if selected_specialty != 'All':
-        df_filtered = df[df['Specialty'] == selected_specialty]
+        df_filtered = df[df['Taxonomy Description'] == selected_specialty]
     else:
         df_filtered = df
 
