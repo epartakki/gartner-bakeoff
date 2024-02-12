@@ -4,3 +4,6 @@ matplotlib
 seaborn
 plotly
 plotly.express
+geopy.geocoders 
+nominatim
+time
