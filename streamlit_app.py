@@ -36,16 +36,19 @@ def plot_data(filtered_df):
 def main():
     df = load_data()
 
+    # Display the app title
+    st.title("Poverty Rates by Age Group, Methodology, and Year")
+
     # Filters above the graph
     country_options = ['Select All'] + sorted(df['country'].unique().tolist())
     age_group_options = ['Select All'] + sorted(df['age'].unique().tolist())
     # Since methodology is pre-filtered, no selector is needed for it
     year_options = ['Select All'] + sorted(df['year'].astype(str).unique().tolist())  # Ensure years are strings for consistency
 
-    # Filter selectors
-    countries = st.multiselect("Select Countries", options=country_options, default='Select All')
-    age_groups = st.multiselect("Select Age Groups", options=age_group_options, default='Select All')
-    selected_year = st.selectbox("Select Year", options=year_options, index=0)
+    # Filter selectors with explicit keys
+    countries = st.multiselect("Select Countries", options=country_options, default='Select All', key='countries_select')
+    age_groups = st.multiselect("Select Age Groups", options=age_group_options, default='Select All', key='age_groups_select')
+    selected_year = st.selectbox("Select Year", options=year_options, index=0, key='year_select')
 
     # Handle 'Select All' functionality for filters
     if 'Select All' in countries:
