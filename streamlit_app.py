@@ -41,7 +41,7 @@ if page == "Data Visualization":
     country_options = ['Select All'] + sorted(df['country'].unique().tolist())
     year_options = ['Select All'] + sorted(df['year'].unique().tolist())
     countries = st.multiselect("Select Countries", options=country_options, default='Select All')
-    selected_year = st.selectbox("Select Year", options=year_options)
+    selected_year = st.multiselect("Select Year", options=year_options)
 
     if 'Select All' in countries:
         countries = country_options[1:]
