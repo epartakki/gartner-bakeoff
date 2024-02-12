@@ -39,19 +39,15 @@ def main():
     # Display the app title again is redundant, you can remove the second title.
     # Filters above the graph
     country_options = ['Select All'] + sorted(df['country'].unique().tolist())
-    age_group_options = ['Select All'] + sorted(df['age'].unique().tolist())
     year_options = ['Select All'] + sorted(df['year'].unique().tolist())
 
     # Filter selectors
     countries = st.multiselect("Select Countries", options=country_options, default='Select All')
-    age_groups = st.multiselect("Select Age Groups", options=age_group_options, default='Select All')
     selected_year = st.selectbox("Select Year", options=year_options, index=0)
 
     # Handle 'Select All' functionality
     if 'Select All' in countries:
         countries = country_options[1:]  # Exclude 'Select All'
-    if 'Select All' in age_groups:
-        age_groups = age_group_options[1:]  # Exclude 'Select All'
     
     # Filter the data
     if selected_year == 'Select All':
