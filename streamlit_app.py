@@ -10,6 +10,15 @@ def load_data():
 
 df = load_data()
 
+# Use the printed column names to set these variables correctly
+country_column_name = 'Country'  # Replace with the actual column name for countries
+age_group_column_name = 'Age Group'  # Replace with the actual column name for age groups
+
+# ... (rest of your code) ...
+
+# Update the filtering step with the correct column names
+filtered_data = df[df[country_column_name].isin(countries) & df[age_group_column_name].isin(age_groups)]
+
 # Check your column names and ensure they match these values
 age_group_column_name = 'Age Group'  # Adjust if your actual column name is different
 
