@@ -21,7 +21,8 @@ def plot_map(df, year):
     filtered_df = df[df['year'] == year]
     fig = px.scatter_geo(filtered_df, locations="country", color="value",
                          hover_name="country", size="value",
-                         projection="natural earth", title=f"Poverty Rates in {year}")
+                         projection="natural earth", title=f"Poverty Rates in {year}",
+                         locationmode='country names')  # Ensure this matches your data
     st.plotly_chart(fig, use_container_width=True)
 
 def main():
