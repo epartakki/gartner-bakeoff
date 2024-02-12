@@ -62,7 +62,7 @@ elif page == "Provider Location in the United States":
 
     @st.cache
     def load_provider_data():
-        data = pd.read_csv("provider.csv")
+        data = pd.read_csv("providers.csv")
         # Assuming "Enriched Region" needs to be split into latitude and longitude
         # This is a placeholder: adjust according to your actual data format
         # data[['Latitude', 'Longitude']] = data['Enriched Region'].str.split(',', expand=True).astype(float)
