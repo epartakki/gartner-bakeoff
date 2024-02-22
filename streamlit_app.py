@@ -7,7 +7,7 @@ st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ("OECD Report on Poverty", "Providers accepting Medicaid", "Access to Subsidized Medicine", "About"))
 
 if page == "OECD Report on Poverty":
-    # Create three columns
+    # Create three columns (centers logo)
     col1, col2, col3 = st.columns([1, 2, 1])  # The middle column is larger
 
     # Display the logo in the middle column
